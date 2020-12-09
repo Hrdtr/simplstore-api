@@ -1,8 +1,5 @@
-FROM node:12:slim
+FROM node:12-slim
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
 COPY . .
-
-EXPOSE 3000
+RUN npm ci --only=production
 CMD ["node", "index.js"]
