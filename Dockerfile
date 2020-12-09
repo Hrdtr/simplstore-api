@@ -1,11 +1,7 @@
-FROM node:12 AS base
+FROM node:12
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
-
-FROM node:12-alpine
-WORKDIR /app
-COPY --from=base /app .
 COPY . .
 
 EXPOSE 3000
