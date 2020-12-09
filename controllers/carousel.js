@@ -55,15 +55,15 @@ module.exports = {
         .status(406)
         .send({ error: true, msg: "(Some) Required data missing" });
     }
-    const findExist = data.carousels.find(
-      (d) => d.productCode === req.body.productCode
-    );
-    if (findExist) {
-      return res.status(409).send({
-        error: true,
-        msg: "Carousel which link to the product already exist",
-      });
-    }
+    // const findExist = data.carousels.find(
+    //   (d) => d.productCode === req.body.productCode
+    // );
+    // if (findExist) {
+    //   return res.status(409).send({
+    //     error: true,
+    //     msg: "Carousel which link to the product already exist",
+    //   });
+    // }
     const filteredData = data.carousels.filter(
       (d) => d.productCode !== req.params.productCode
     );
