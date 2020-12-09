@@ -1,0 +1,6 @@
+node_modules
+db/*
+!db/.gitkeep 
+images/*
+!images/.gitkeep 
+.env

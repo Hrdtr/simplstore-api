@@ -1,0 +1,31 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Build 👨🏻‍💻
+        run: docker build -t simplstore-api .
+
+      - name: Tags 🏷️
+        run: |
+          docker tag simplstore-api registry.cognitive.id/simplstore-api:${{ github.sha }}
+          docker tag simplstore-api registry.cognitive.id/simplstore-api:latest
+      - name: Push 🚚
+        run: |
+          docker push registry.cognitive.id/simplstore-api:${{ github.sha }}
+          docker push registry.cognitive.id/simplstore-api:latest
