@@ -28,10 +28,11 @@ var uploadImg = multer({
   },
 });
 
-const { upload, list } = require("../controllers/img");
+const { upload, list, deleteImg } = require("../controllers/img");
 
 router.use("/", express.static(path.join(__dirname, "..", "images")));
 router.post("/upload", [auth(), uploadImg.array("files", 5)], upload);
+router.post("/delete", auth(), deleteImg);
 router.get("/list", auth(), list);
 
 module.exports = router;
