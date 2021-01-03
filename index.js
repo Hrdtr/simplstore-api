@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const compression = require("compression");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
@@ -10,6 +11,7 @@ corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
+app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
