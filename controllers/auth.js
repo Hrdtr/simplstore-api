@@ -10,20 +10,24 @@ module.exports = {
     const data = dt.get();
     const user = data.users.filter((u) => u.username === req.body.username)[0];
     if (!user) {
-      {
-        res.send("User not found");
-      }
+      res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     } else if (bcrypt.compareSync(req.body.password, user.password)) {
       const accessToken = jwt.sign(
         { username: user.username, role: user.role },
         accessTokenSecret
       );
-      res.json({
+      res.status(200).json({
         success: true,
         accessToken,
       });
     } else {
-      res.send("Username or password incorrect");
+      res.status(401).json({
+        success: false,
+        message: "Password incorrect",
+      });
     }
   },
 };
